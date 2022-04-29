@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">cgassignment2</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Scout Groups</string>
+    <string name="nav_header_subtitle">20083465@wit.ie</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="add_group">Add Group</string>
+    <string name="list_group">List groups</string>
+
+    <string name="action_Add_Group">Add Group</string>
+    <string name="action_List_Group">List all groups</string>
+    <string name="enter_Location">Enter Group Location</string>
+    <string name="GroupTitle">Welcome </string>
+    <string name="Subtitle">Would you like to add a group or view the groups we already have via the menu </string>
+    <string name="AddButton">Add Group</string>
+    <string name="Group_Name">Group Name</string>
+    <string name="enter_Name">Enter Group Name</string>
+    <string name="Location">Location</string>
+    <string name="save_group"> Save group </string>
+</resources>

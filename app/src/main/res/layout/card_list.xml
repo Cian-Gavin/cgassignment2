@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+ 
+
+    <data>
+        <variable
+            name="listgroup"
+            type="cg.p.cgassignment2.models.ScoutGroupModels" />
+    </data>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:elevation="24dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#008001"
+            android:foregroundTint="#F8F3F3"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/imageIcon"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                app:srcCompat="@drawable/scouting_ireland_logo" />
+
+            <TextView
+                android:id="@+id/Group_Name"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/imageIcon"
+                android:text="@{listgroup.name}"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                tools:text="Name" />
+
+            <TextView
+                android:id="@+id/GLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/Group_Name"
+                android:text="@{listgroup.location}"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                tools:text="Location" />
+
+
+        </RelativeLayout>
+</androidx.cardview.widget.CardView>
+</layout>
