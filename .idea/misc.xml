@@ -9,6 +9,7 @@
         <entry key="..\:/Users/cgavi/Documents/Mobile App 2/cgassignment2/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.148" />
         <entry key="..\:/Users/cgavi/Documents/Mobile App 2/cgassignment2/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.148" />
         <entry key="..\:/Users/cgavi/Documents/Mobile App 2/cgassignment2/app/src/main/res/drawable/side_nav_bar.xml" value="0.148" />
+        <entry key="..\:/Users/cgavi/Documents/Mobile App 2/cgassignment2/app/src/main/res/layout/activity_main.xml" value="0.1796875" />
         <entry key="..\:/Users/cgavi/Documents/Mobile App 2/cgassignment2/app/src/main/res/layout/app_bar_main.xml" value="0.1796875" />
         <entry key="..\:/Users/cgavi/Documents/Mobile App 2/cgassignment2/app/src/main/res/layout/card.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/cgavi/Documents/Mobile App 2/cgassignment2/app/src/main/res/layout/card_list.xml" value="0.1" />
@@ -18,7 +19,10 @@
         <entry key="..\:/Users/cgavi/Documents/Mobile App 2/cgassignment2/app/src/main/res/layout/fragment_home.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/cgavi/Documents/Mobile App 2/cgassignment2/app/src/main/res/layout/fragment_lis.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/cgavi/Documents/Mobile App 2/cgassignment2/app/src/main/res/layout/fragment_list.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/cgavi/Documents/Mobile App 2/cgassignment2/app/src/main/res/layout/fragment_login.xml" value="0.1796875" />
         <entry key="..\:/Users/cgavi/Documents/Mobile App 2/cgassignment2/app/src/main/res/layout/fragment_slideshow.xml" value="0.1796875" />
+        <entry key="..\:/Users/cgavi/Documents/Mobile App 2/cgassignment2/app/src/main/res/layout/fragment_welcome.xml" value="0.1796875" />
+        <entry key="..\:/Users/cgavi/Documents/Mobile App 2/cgassignment2/app/src/main/res/layout/login.xml" value="0.1" />
         <entry key="..\:/Users/cgavi/Documents/Mobile App 2/cgassignment2/app/src/main/res/layout/nav_header_main.xml" value="0.1" />
         <entry key="..\:/Users/cgavi/Documents/Mobile App 2/cgassignment2/app/src/main/res/menu/activity_main_drawer.xml" value="0.17692307692307693" />
         <entry key="..\:/Users/cgavi/Documents/Mobile App 2/cgassignment2/app/src/main/res/menu/main.xml" value="0.1361111111111111" />

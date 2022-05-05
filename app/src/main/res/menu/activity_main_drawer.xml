@@ -5,9 +5,9 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_welcome"
             android:icon="@drawable/e1197754a44d9407e4cdbf4678ae3487"
-            android:title="@string/menu_home" />
+            android:title="@string/menu_welcome" />
         <item
             android:id="@+id/add_group"
             android:icon="@drawable/pluslist"
@@ -17,4 +17,13 @@
             android:icon="@drawable/iconforlist"
             android:title="@string/list_group" />
     </group>
+    <item android:title="Access Control">
+        <menu>
+            <item
+                android:id="@+id/signout"
+                android:icon="@android:drawable/ic_menu_revert"
+                android:onClick="signOut"
+                android:title="@string/sign_out" />
+        </menu>
+    </item>
 </menu>
