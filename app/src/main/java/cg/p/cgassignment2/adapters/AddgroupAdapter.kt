@@ -29,15 +29,21 @@ class AddgroupAdapter constructor(private var listGroups: List<ScoutGroupModels>
         holder.bind(addedgroup,listener)
     }
 
+    fun removeAt(position: Int) {
+        //listGroups.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
     override fun getItemCount(): Int = listGroups.size
 
     inner class MainHolder(val binding : CardListBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(groupModels: ScoutGroupModels, listener: AddClickListener) {
-            //binding.listgroup
             binding.listgroup = groupModels
-            //binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
-            binding.root.setOnClickListener { listener.onAddGroupClick(groupModels) }
+            binding.root.setOnClickListener { listener.onAddGroupClick(groupModels)
+            binding.executePendingBindings()
+
+            }
 
         }
     }

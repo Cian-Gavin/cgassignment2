@@ -16,12 +16,52 @@
         android:id="@+id/add_group"
         android:name="cg.p.cgassignment2.ui.Add.AddFragment"
         android:label="@string/add_group"
-        tools:layout="@layout/fragment_addgroup" />
+        tools:layout="@layout/fragment_addgroup" >
+        <action
+            android:id="@+id/action_add_group_to_nav_welcome"
+            app:destination="@id/nav_welcome" />
+        <action
+            android:id="@+id/action_add_group_to_listFragment"
+            app:destination="@id/list_group" />
+    </fragment>
 
     <fragment
         android:id="@+id/list_group"
         android:name="cg.p.cgassignment2.ui.List.ListFragment"
         android:label="@string/list_group"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/action_list_group_to_add_group"
+            app:destination="@id/add_group"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_list_group_to_groupInfo"
+            app:destination="@id/groupInfo" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/ourStory"
+        android:name="cg.p.cgassignment2.ui.ourStory.OurStory"
+        android:label="@string/ourStory_Title"
+        tools:layout="@layout/fragment_our_story" />
+
+    <fragment
+        android:id="@+id/groupInfo"
+        android:name="cg.p.cgassignment2.ui.info.GroupInfo"
+        android:label="fragment_group_info"
+        tools:layout="@layout/fragment_group_info" >
+
+        <argument
+            android:name="groupid"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_groupInfo_to_listFragment2"
+            app:destination="@id/list_group" />
+
+
+    </fragment>
+
 
 </navigation>

@@ -8,9 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import cg.p.cgassignment2.R
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import cg.p.cgassignment2.MainActivity
+import cg.p.cgassignment2.ui.mainActivity.MainActivity
 import cg.p.cgassignment2.databinding.LoginBinding
-import cg.p.cgassignment2.ui.Welcome.WelcomeFragment
 import timber.log.Timber
 
 class Login : AppCompatActivity()

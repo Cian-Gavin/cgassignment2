@@ -1,13 +1,12 @@
-package cg.p.cgassignment2.ui.Welcome
+package cg.p.cgassignment2.ui.ourStory
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 
-class WelcomeViewModel : ViewModel() {
-
+class OurStoryViewModel
+{
     private val _text = MutableLiveData<String>().apply {
-        value = "test"
+        value = ""
     }
     val text: LiveData<String> = _text
 }

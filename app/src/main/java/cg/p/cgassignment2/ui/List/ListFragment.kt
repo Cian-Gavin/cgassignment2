@@ -1,64 +1,129 @@
 package cg.p.cgassignment2.ui.List
 
+import android.app.AlertDialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import cg.p.cgassignment2.R
 import cg.p.cgassignment2.adapters.AddClickListener
 import cg.p.cgassignment2.adapters.AddgroupAdapter
 import cg.p.cgassignment2.databinding.FragmentListBinding
 import cg.p.cgassignment2.models.ScoutGroupModels
+import cg.p.cgassignment2.ui.Authentication.LoggedInViewModel
+import cg.p.cgassignment2.utils.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class ListFragment : Fragment(), AddClickListener {
 
     private var _binding: FragmentListBinding? = null
-    private lateinit var listViewModel: ListViewModel
+    private val _Fbinding get() = _binding!!
+    lateinit var loader : AlertDialog
+    private val listViewModel: ListViewModel by activityViewModels()
+    private val loggedInViewModel : LoggedInViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,container: ViewGroup?,
         savedInstanceState: Bundle?
          ): View {
 
-
         _binding = FragmentListBinding.inflate(inflater, container, false)
-        val root = binding.root
+        val root = _Fbinding.root
+        loader = createLoader(requireActivity())
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
-        listViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
+        _Fbinding.recyclerView.layoutManager = LinearLayoutManager(activity)
+        _Fbinding.fab.setOnClickListener {
+            val action = ListFragmentDirections.actionListGroupToAddGroup()
+            findNavController().navigate(action)
+        }
+        showLoader(loader,"Downloading Scout Groups")
         listViewModel.observableGroupList.observe(viewLifecycleOwner, Observer{
             groups ->
             groups?.let {render(groups) }
         })
 
+
+        //setSwipeRefresh()
+
+        val swipeDeleteHandler = object : SwipeToDeleteCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                showLoader(loader,"Deleting Group")
+                val adapter = _Fbinding.recyclerView.adapter as AddgroupAdapter
+                adapter.removeAt(viewHolder.adapterPosition)
+                listViewModel.delete(listViewModel.liveFirebaseUser.value?.email!!,
+                    (viewHolder.itemView.tag as ScoutGroupModels)._id)
+                hideLoader(loader)
+            }
+        }
+        val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
+        itemTouchDeleteHelper.attachToRecyclerView(_Fbinding.recyclerView)
+
+
+        val swipeEditHandler = object : SwipeToEditCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                onAddGroupClick(viewHolder.itemView.tag as ScoutGroupModels)
+            }
+        }
+        val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
+        itemTouchEditHelper.attachToRecyclerView(_Fbinding.recyclerView)
+
         return root
     }
 
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.activity_main_drawer, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item,
+            requireView().findNavController()) || super.onOptionsItemSelected(item)
+    }
+
     private fun render(groupList: List<ScoutGroupModels>) {
-        binding.recyclerView.adapter = AddgroupAdapter(groupList,this)
+        _Fbinding.recyclerView.adapter = AddgroupAdapter(groupList,this)
         if (groupList.isEmpty()) {
-            binding.recyclerView.visibility = View.GONE
-            //binding.donationsNotFound.visibility = View.VISIBLE
+            _Fbinding.recyclerView.visibility = View.GONE
+            _Fbinding.GroupsNotFound.visibility = View.VISIBLE
+
         } else {
-             binding.recyclerView.visibility = View.VISIBLE
-           // fragBinding.donationsNotFound.visibility = View.GONE
+            _Fbinding.recyclerView.visibility = View.VISIBLE
+            _Fbinding.GroupsNotFound.visibility = View.GONE
         }
     }
 
     override fun onResume() {
         super.onResume()
-        listViewModel.load()
+        showLoader(loader,"Downloading Groups")
+
+        loggedInViewModel.liveFirebaseUser.observe(viewLifecycleOwner, Observer { firebaseUser ->
+            if (firebaseUser != null) {
+                listViewModel.liveFirebaseUser.value = firebaseUser
+                listViewModel.load()
+            }
+        })
+        //hideLoader(loader)
     }
 
     override fun onDestroyView() {
@@ -66,9 +131,9 @@ class ListFragment : Fragment(), AddClickListener {
         _binding = null
     }
 
-    override fun onAddGroupClick(groupModels: ScoutGroupModels) {
-        TODO("Not yet implemented")
+    override fun onAddGroupClick(groupModels: ScoutGroupModels)
+    {
+        val action = ListFragmentDirections.actionListGroupToGroupInfo(groupModels._id)
+        findNavController().navigate(action)
     }
-
-
 }

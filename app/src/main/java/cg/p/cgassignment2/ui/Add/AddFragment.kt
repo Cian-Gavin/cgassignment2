@@ -1,20 +1,29 @@
 package cg.p.cgassignment2.ui.Add
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.ListFragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
+import cg.p.cgassignment2.R
 import cg.p.cgassignment2.databinding.FragmentAddgroupBinding
 import cg.p.cgassignment2.models.ScoutGroupModels
+import cg.p.cgassignment2.ui.Authentication.LoggedInViewModel
+import cg.p.cgassignment2.ui.List.ListViewModel
 
 class AddFragment : Fragment()
 {
     private var _binding: FragmentAddgroupBinding? = null
     private lateinit var addViewModelObj: AddViewModel
+    private val listViewModel : ListViewModel by activityViewModels()
+    private val loggedInViewModel : LoggedInViewModel by activityViewModels()
+
+
 
 
     // This property is only valid between onCreateView and
@@ -53,12 +62,14 @@ class AddFragment : Fragment()
             else
                 Toast.makeText(context,"Please enter Scout Group Location", Toast.LENGTH_LONG).show()
             if(name.isNotEmpty() && location.isNotEmpty())
-                addViewModelObj.addgroup(ScoutGroupModels(name = name, location = location))
+               // addViewModelObj.addgroup(ScoutGroupModels(name = name, location = location,  email = loggedInViewModel.liveFirebaseUser.value?.email!!))
 
-            Toast.makeText(context,"HERE" , Toast.LENGTH_LONG).show()
+            addViewModelObj.addgroup(loggedInViewModel.liveFirebaseUser,
+                ScoutGroupModels(name = name, location = location,  email = loggedInViewModel.liveFirebaseUser.value?.email!!))
         }
 
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

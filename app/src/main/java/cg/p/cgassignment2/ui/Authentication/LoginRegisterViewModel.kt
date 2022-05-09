@@ -10,7 +10,6 @@ class LoginRegisterViewModel(app: Application) : AndroidViewModel(app)
 {
     var firebaseAuthManager : FBAuthManager = FBAuthManager(app)
     var liveFirebaseUser : MutableLiveData<FirebaseUser> = firebaseAuthManager.liveFirebaseUser
-    var loggedOut : MutableLiveData<Boolean> = firebaseAuthManager.loggedOut
 
     fun login(email: String?, password: String?) {
         firebaseAuthManager.login(email, password)

@@ -1,4 +1,4 @@
-package cg.p.cgassignment2
+package cg.p.cgassignment2.ui.mainActivity
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import cg.p.cgassignment2.R
 import cg.p.cgassignment2.databinding.ActivityMainBinding
 import cg.p.cgassignment2.databinding.NavHeaderMainBinding
 import cg.p.cgassignment2.ui.Authentication.LoggedInViewModel
@@ -31,11 +32,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-       WelcomeBinding = ActivityMainBinding.inflate(layoutInflater)
+        WelcomeBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(WelcomeBinding.root)
         drawerLayout = WelcomeBinding.drawerLayout
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
-//        setSupportActionBar(toolbar)
+        setSupportActionBar(toolbar)
 
         val navHostFragment = supportFragmentManager.
         findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
@@ -45,7 +46,8 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
 
         appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.nav_welcome, R.id.add_group, R.id.list_group), drawerLayout)
+            R.id.nav_welcome, R.id.add_group, R.id.list_group, R.id.ourStory
+        ), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         val navView = WelcomeBinding.navView

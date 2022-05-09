@@ -16,6 +16,10 @@
             android:id="@+id/list_group"
             android:icon="@drawable/iconforlist"
             android:title="@string/list_group" />
+        <item
+            android:id="@+id/ourStory"
+            android:icon="@drawable/pic"
+            android:title="@string/ourStory_Title" />
     </group>
     <item android:title="Access Control">
         <menu>

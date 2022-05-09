@@ -22,6 +22,9 @@
     <string name="Location">Location</string>
     <string name="save_group"> Save group </string>
 
+    <string name="GroupsNotFound">No Groups on our system. Please go add one</string>
+
+    <string name="messageLoading">Please Wait while we load groups that have been added</string>
 
     <!-- START Firebase Resources-->
 
@@ -48,7 +51,9 @@
     <string name="update">Update</string>
     <string name="delete">Delete</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="ourStory_Title">Our Story</string>
+    <string name="ourStory_paragragh">We would like to thank you for checking our our App. We hope it finds it useful</string>
+    <string name="action_story">Our Story</string>
 
 </resources>
