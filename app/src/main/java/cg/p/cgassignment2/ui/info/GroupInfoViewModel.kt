@@ -20,10 +20,10 @@ class GroupInfoViewModel : ViewModel()
     fun getGroup(email:String, id: String) {
         try {
             FBDatabaseManager.findById(email, id, addedGroups)
-            Timber.i("Detail getDonation() Success : ${addedGroups.value.toString()}")
+            Timber.i("Detail GetGroup() Success : ${addedGroups.value.toString()}")
         }
         catch (e: Exception) {
-            Timber.i("Detail getDonation() Error : $e.message")
+            Timber.i("Detail GetGroup() Error : $e.message")
         }
     }
 

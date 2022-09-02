@@ -16,7 +16,7 @@ object FBDatabaseManager : ScoutGroupStore {
 
     override fun findAll(email: String, groupList: MutableLiveData<List<ScoutGroupModels>>)
     {
-        database.child("user-donations").child(email)
+        database.child("GroupsaddedByUser").child(email)
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
                     Timber.i("Firebase Scout app error : ${error.message}")
@@ -58,12 +58,12 @@ object FBDatabaseManager : ScoutGroupStore {
             Timber.i("Firebase Error : Key Empty")
             return
         }
-        scoutGroupModels._id = key
-        val donationValues = scoutGroupModels.toMap()
+        scoutGroupModels.uid = key
+        val groupValues = scoutGroupModels.toMap()
 
         val childAdd = HashMap<String, Any>()
-        childAdd["/AllScoutGroupsAdded/$key"] = donationValues
-        childAdd["/GroupsaddedByUser/$uid/$key"] = donationValues
+        childAdd["/AllScoutGroupsAdded/$key"] = groupValues
+        childAdd["/GroupsaddedByUser/$uid/$key"] = groupValues
 
         database.updateChildren(childAdd)
     }
@@ -71,7 +71,7 @@ object FBDatabaseManager : ScoutGroupStore {
     override fun delete(email: String, id: String)
     {
         val childDelete : MutableMap<String, Any?> = HashMap()
-        childDelete["/AllScoutGroupsAdded/$email"] = null
+        childDelete["/AllScoutGroupsAdded/$id"] = null
         childDelete["/GroupsaddedByUser/$email/$id"] = null
 
         database.updateChildren(childDelete)

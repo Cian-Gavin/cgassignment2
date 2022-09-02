@@ -11,8 +11,7 @@ interface ScoutGroupStore {
                 groupList:
                 MutableLiveData<List<ScoutGroupModels>>
     )
-    fun findById(email:String, id: String,
-                 scoutGroupModels: MutableLiveData<ScoutGroupModels>
+    fun findById(email:String, id: String, scoutGroupModels: MutableLiveData<ScoutGroupModels>
     )
     fun create(firebaseUser: MutableLiveData<FirebaseUser>, scoutGroupModels: ScoutGroupModels)
     fun delete(email:String,id: String)

@@ -49,7 +49,7 @@ class GroupInfo : Fragment() {
         _fbinding.deleteGroupButton.setOnClickListener {
             listViewModel.delete(
                 loggedInViewModel.liveFirebaseUser.value?.email!!,
-                groupInfoViewModel.observableGroups.value?._id!!)
+                groupInfoViewModel.observableGroups.value?.uid!!)
             findNavController().navigateUp()
         }
 
@@ -60,6 +60,10 @@ class GroupInfo : Fragment() {
             _fbinding.groups = groupInfoViewModel
              //Timber.i("Retrofit _fbinding.groups == ${_fbinding.groups")
         }
+    override fun onResume() {
+        super.onResume()
+        groupInfoViewModel.getGroup(loggedInViewModel.liveFirebaseUser.value?.uid!!,args.groupid)
+    }
 
 
 }

@@ -21,9 +21,9 @@ class ListViewModel : ViewModel() {
 
     init { load() }
 
-    fun load() {
+        fun load() {
         try {
-            FBDatabaseManager.findAll(liveFirebaseUser.value?.email!!, groupList)
+            FBDatabaseManager.findAll(liveFirebaseUser.value?.uid!!, groupList)
             Timber.i("Report Load Success : ${groupList.value.toString()}")
         }
         catch (e: Exception) {

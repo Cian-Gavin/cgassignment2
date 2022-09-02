@@ -59,19 +59,22 @@ class ListFragment : Fragment(), AddClickListener {
         showLoader(loader,"Downloading Scout Groups")
         listViewModel.observableGroupList.observe(viewLifecycleOwner, Observer{
             groups ->
-            groups?.let {render(groups) }
+            groups?.let {render(groups as ArrayList<ScoutGroupModels>)
+                hideLoader(loader)
+                checkSwipeRefresh()}
         })
 
 
-        //setSwipeRefresh()
+        setSwipeRefresh()
 
         val swipeDeleteHandler = object : SwipeToDeleteCallback(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 showLoader(loader,"Deleting Group")
                 val adapter = _Fbinding.recyclerView.adapter as AddgroupAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
-                listViewModel.delete(listViewModel.liveFirebaseUser.value?.email!!,
-                    (viewHolder.itemView.tag as ScoutGroupModels)._id)
+                listViewModel.delete(listViewModel.liveFirebaseUser.value?.uid!!,
+                    (viewHolder.itemView.tag as ScoutGroupModels).uid
+                )
                 hideLoader(loader)
             }
         }
@@ -133,7 +136,19 @@ class ListFragment : Fragment(), AddClickListener {
 
     override fun onAddGroupClick(groupModels: ScoutGroupModels)
     {
-        val action = ListFragmentDirections.actionListGroupToGroupInfo(groupModels._id)
+        val action = ListFragmentDirections.actionListGroupToGroupInfo(groupModels.uid)
         findNavController().navigate(action)
+    }
+    private fun setSwipeRefresh() {
+        _Fbinding.swiperefresh.setOnRefreshListener {
+            _Fbinding.swiperefresh.isRefreshing = true
+            showLoader(loader,"Downloading Donations")
+            listViewModel.load()
+        }
+    }
+
+    private fun checkSwipeRefresh() {
+        if (_Fbinding.swiperefresh.isRefreshing)
+            _Fbinding.swiperefresh.isRefreshing = false
     }
 }
